@@ -6,38 +6,22 @@ import Reset from './components/Reset'
 import axios from 'axios'
 import escapeRegExp from 'escape-string-regexp'
 import './App.css';
+import initdata from './initdata.json';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: true,
-      hover: false,
-      query: "",
-      click: 0,
-      venues: [],
-      showingVenues: [
-        {name: 'Antrim Park', lat: 40.0784, lng: -83.0377, isOpen: false},
-        {name: 'Park of Roses', lat: 40.0440, lng: -83.0253, isOpen: false},
-        {name: 'Clinton-Como Park', lat: 40.0261, lng: -83.0225, isOpen: false},
-        {name: 'Thompson Park', lat: 40.0438, lng: -83.0717, isOpen: false},
-        {name: 'Burbank Park', lat: 40.0535, lng: -83.0846, isOpen: false},
-        {name: 'Fancyburg Park', lat: 40.023258, lng: -83.087907, isOpen: false},
-        {name: 'Olentangy Trail', lat: 40.002127, lng: -83.021716, isOpen: false},
-      ],
-      venueLocation: [],
-      center: [
-        {lat: 40.027587, lng: -83.0624}
-      ],
-      markers: [
-        {name: 'Antrim Park', lat: 40.0784, lng: -83.0377, isOpen: false},
-        {name: 'Park of Roses', lat: 40.0440, lng: -83.0253, isOpen: false},
-        {name: 'Clinton-Como Park', lat: 40.0261, lng: -83.0225, isOpen: false},
-        {name: 'Thompson Park', lat: 40.0438, lng: -83.0717, isOpen: false},
-        {name: 'Burbank Park', lat: 40.0535, lng: -83.0846, isOpen: false},
-        {name: 'Fancyburg Park', lat: 40.023258, lng: -83.087907, isOpen: false},
-        {name: 'Olentangy Trail', lat: 40.002127, lng: -83.021716, isOpen: false},
-      ]
+      data: null,
+      // showModal: true,
+      // hover: false,
+      // query: "",
+      // click: 0,
+      // venues: [],
+      // showingVenues: [],
+      // venueLocation: [],
+      // center: [],
+      // markers: []
     };
     this.handleCloseModal = this.handleClose.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -46,6 +30,15 @@ class App extends Component {
     this.updateQuery = this.updateQuery.bind(this);
     this.clearQuery = this.clearQuery.bind(this);
     this.handleReset = this.handleReset.bind(this);
+  }
+
+  // get initial data from json
+  componentDidMount() {
+    this.setState({ isLoading: true });
+
+    fetch(initdata)
+    .then(response => response.json())
+    .then(data => this.setState({ data }))
   }
 
   // function to get coffee shopes at chosen location using clicked marker lat & lng
@@ -153,7 +146,7 @@ class App extends Component {
     this.setState({ hover: !this.state.hover })
   }
 
-  // update the query state to match the input  
+  // update the query state to match the input
   updateQuery = (query) => {
     this.setState({
       query: query.trim()
@@ -185,35 +178,7 @@ class App extends Component {
 
   // set state to initial state
   handleReset = () => {
-    this.setState({
-      showModal: true,
-      hover: false,
-      query: "",
-      click: 0,
-      venues: [],
-      showingVenues: [
-        {name: 'Antrim Park', lat: 40.0784, lng: -83.0377, isOpen: false},
-        {name: 'Park of Roses', lat: 40.0440, lng: -83.0253, isOpen: false},
-        {name: 'Clinton-Como Park', lat: 40.0261, lng: -83.0225, isOpen: false},
-        {name: 'Thompson Park', lat: 40.0438, lng: -83.0717, isOpen: false},
-        {name: 'Burbank Park', lat: 40.0535, lng: -83.0846, isOpen: false},
-        {name: 'Fancyburg Park', lat: 40.023258, lng: -83.087907, isOpen: false},
-        {name: 'Olentangy Trail', lat: 40.002127, lng: -83.021716, isOpen: false},
-      ],
-      venueLocation: [],
-      center: [
-        {lat: 40.027587, lng: -83.0624}
-      ],
-      markers: [
-        {name: 'Antrim Park', lat: 40.0784, lng: -83.0377, isOpen: false},
-        {name: 'Park of Roses', lat: 40.0440, lng: -83.0253, isOpen: false},
-        {name: 'Clinton-Como Park', lat: 40.0261, lng: -83.0225, isOpen: false},
-        {name: 'Thompson Park', lat: 40.0438, lng: -83.0717, isOpen: false},
-        {name: 'Burbank Park', lat: 40.0535, lng: -83.0846, isOpen: false},
-        {name: 'Fancyburg Park', lat: 40.023258, lng: -83.087907, isOpen: false},
-        {name: 'Olentangy Trail', lat: 40.002127, lng: -83.021716, isOpen: false},
-      ]
-    })
+    this.setState()
   }
 
   render() {
