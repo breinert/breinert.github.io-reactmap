@@ -6,22 +6,21 @@ import Reset from './components/Reset'
 import axios from 'axios'
 import escapeRegExp from 'escape-string-regexp'
 import './App.css';
-import initdata from './initdata.json';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: null,
-      // showModal: true,
-      // hover: false,
-      // query: "",
-      // click: 0,
-      // venues: [],
-      // showingVenues: [],
-      // venueLocation: [],
-      // center: [],
-      // markers: []
+      showModal: true,
+      hover: false,
+      query: "",
+      click: 0,
+      venues: [],
+      showingVenues: [],
+      venueLocation: [],
+      center: [],
+      markers: []
     };
     this.handleCloseModal = this.handleClose.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -36,9 +35,11 @@ class App extends Component {
   componentDidMount() {
     this.setState({ isLoading: true });
 
-    fetch(initdata)
+    fetch('./initdata.json')
     .then(response => response.json())
-    .then(data => this.setState({ data }))
+    .then(data => {this.setState({ data: data });
+  })
+    .catch(error => this.setState({ error, isLoading: false }));
   }
 
   // function to get coffee shopes at chosen location using clicked marker lat & lng

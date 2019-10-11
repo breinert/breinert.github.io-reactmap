@@ -8,7 +8,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     defaultZoom={12}
     defaultCenter={{ lat: 40.027587, lng: -83.0624 }}
     // move center of map to chosen location
-    center={props.center[0] || props.center}
+    center={ props.center ? props.center[0] : { lat: 40.027586, lng: -83.0624 }}
   >
   {/* map the marker info to the map markers */}
   {props.showingVenues &&
